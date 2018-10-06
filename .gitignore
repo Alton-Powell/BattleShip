@@ -1,2 +1,12 @@
 /BattleShipUI/obj/Debug
 /.vs/BattleShip/v15/sqlite3
+/.vs/BattleShip/v15/.suo
+/Application/bin/Debug
+/Application/obj/Debug
+/BattleShipUI/bin/Debug
+/Common/bin/Debug
+/Common/obj/Debug
+/Domain/bin/Debug
+/Domain/obj/Debug
+/packages/StructureMap.4.7.0
+/packages/System.Reflection.Emit.Lightweight.4.3.0
