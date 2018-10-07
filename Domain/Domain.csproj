@@ -50,5 +50,11 @@
     <Compile Include="Ships\Ship.cs" />
     <Compile Include="Ships\ShipStatus.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{9e301c65-a50e-4a21-8ab8-2fabd8837df9}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

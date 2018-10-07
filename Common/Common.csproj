@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Exceptions\InvalidShipSquareRequest.cs" />
+    <Compile Include="Infrastructure\IRandomNumberGenerator.cs" />
+    <Compile Include="Infrastructure\RandomNumberGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <Folder Include="Logging\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

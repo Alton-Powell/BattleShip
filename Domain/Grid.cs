@@ -1,4 +1,6 @@
-﻿using Domain.Ships;
+﻿using Common.Exceptions;
+using Common.Infrastructure;
+using Domain.Ships;
 using System;
 using System.Collections.Generic;
 
@@ -9,12 +11,16 @@ namespace Domain
     {
         private ICollection<Ship> _ships;
         private readonly int _boundary;
+        private readonly IRandomNumberGenerator _randomNumberGenerator;
 
         private ICollection<Square> _unavailbleSquare;
 
-        public Grid(int boundary)
+
+        public Grid(int boundary, IRandomNumberGenerator randomNumberGenerator)
         {
             _boundary = boundary;
+            _randomNumberGenerator = randomNumberGenerator;
+
             _ships = new List<Ship>();
 
             _unavailbleSquare = new List<Square>();
@@ -79,34 +85,42 @@ namespace Domain
 
         private void PositionShipOnGrid(char column, char row, Ship ship, bool placeShipAcross)
         {
-            var columnRow = $"{column.ToString()}{row.ToString()}";
-            var squareOnGrid = new Square { ColumnRow = columnRow };
-            ship.SetShipPosition(squareOnGrid);
-
-            _unavailbleSquare.Add(squareOnGrid);
-            
-            for (int i = 0; i < (ship.SpatialCapacity - 1); i++)
+            try
             {
-                if (placeShipAcross)
+                var columnRow = $"{column.ToString()}{row.ToString()}";
+                var squareOnGrid = new Square { ColumnRow = columnRow };
+
+                ship.SetShipPosition(squareOnGrid);
+
+                _unavailbleSquare.Add(squareOnGrid);
+
+                for (int i = 0; i < (ship.SpatialCapacity - 1); i++)
                 {
-                    column = (char)(column + 1);
-                    columnRow = $"{column.ToString()}{row.ToString()}";
+                    if (placeShipAcross)
+                    {
+                        column = (char)(column + 1);
+                        columnRow = $"{column.ToString()}{row.ToString()}";
 
-                    squareOnGrid = new Square { ColumnRow = columnRow };
+                        squareOnGrid = new Square { ColumnRow = columnRow };
 
-                    ship.SetShipPosition(squareOnGrid);
-                    _unavailbleSquare.Add(squareOnGrid);
+                        ship.SetShipPosition(squareOnGrid);
+                        _unavailbleSquare.Add(squareOnGrid);
+                    }
+                    else
+                    {
+                        row = (char)(row + 1);
+                        columnRow = $"{column.ToString()}{row.ToString()}";
+
+                        squareOnGrid = new Square { ColumnRow = columnRow };
+
+                        ship.SetShipPosition(squareOnGrid);
+                        _unavailbleSquare.Add(squareOnGrid);
+                    }
                 }
-                else
-                {
-                    row = (char)(row + 1);
-                    columnRow = $"{column.ToString()}{row.ToString()}";
-
-                    squareOnGrid = new Square { ColumnRow = columnRow };
-
-                    ship.SetShipPosition(squareOnGrid);
-                    _unavailbleSquare.Add(squareOnGrid);
-                }
+            }
+            catch(InvalidShipSquareRequest)
+            {
+                //Log exception for debugging using Log4net
             }
 
         }
@@ -146,15 +160,13 @@ namespace Domain
 
         private char GetRandomColumn()
         {
-            var random = new Random();
-            var randomNumber = random.Next(0, 9);
+            var randomNumber = _randomNumberGenerator.Next(0, 9);
             return (char)('A' + randomNumber);
         }
 
         private char GetRandomRow()
         {
-            var random = new Random();
-            var randomNumber = random.Next(0, 9);
+            var randomNumber = _randomNumberGenerator.Next(0, 9);
             return (char)('0' + randomNumber);
         }
 

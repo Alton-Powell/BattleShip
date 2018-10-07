@@ -10,3 +10,9 @@
 /Domain/obj/Debug
 /packages/StructureMap.4.7.0
 /packages/System.Reflection.Emit.Lightweight.4.3.0
+/Tests/obj/Debug
+/packages/Castle.Core.4.3.1
+/packages/Moq.4.10.0
+/packages/NUnit.3.11.0
+/packages/System.Threading.Tasks.Extensions.4.3.0
+/packages/System.ValueTuple.4.4.0

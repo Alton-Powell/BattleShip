@@ -1,7 +1,8 @@
 ﻿using Application.Interfaces;
 using Domain.Ships;
 using Domain;
-
+using Common.Infrastructure;
+using System;
 
 namespace Application.Grids.Builder
 {
@@ -13,9 +14,17 @@ namespace Application.Grids.Builder
 
     public class GridBuilder : IGridBuilder
     {
+        private readonly IRandomNumberGenerator _randomNumberGenerator;
+
+        public GridBuilder(IRandomNumberGenerator randomNumberGenerator)
+        {
+            _randomNumberGenerator = randomNumberGenerator ??
+                    throw new ArgumentNullException($"{nameof(randomNumberGenerator)} cannot be null");
+        }
+
         public Grid Create()
         {
-            var grid = new Grid(10);
+            var grid = new Grid(10,_randomNumberGenerator);
 
             var battleShip = new BattleShip();
             var destroyer1 = new Destroyer();

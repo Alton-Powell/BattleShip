@@ -1,5 +1,4 @@
-﻿
-
+﻿using Common.Exceptions;
 using System.Collections.Generic;
 
 namespace Domain.Ships
@@ -20,6 +19,8 @@ namespace Domain.Ships
         {
             if (_shipSquares.Count < _spatialCapacity)
                 _shipSquares.Add(shipPosition);
+            else
+                throw new InvalidShipSquareRequest($"Invalid ship position request for {shipPosition.ColumnRow}");
         }
 
         public bool SetHit(Square targetedSquare)
