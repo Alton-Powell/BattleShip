@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coordinate.cs" />
+    <Compile Include="Ships\BattleShip.cs" />
+    <Compile Include="Ships\Destroyer.cs" />
+    <Compile Include="Square.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ship.cs" />
+    <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\ShipStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

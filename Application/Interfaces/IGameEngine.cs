@@ -6,5 +6,7 @@ namespace Application.Interfaces
     public interface IGameEngine
     {
         void InitializeGame(string playerName);
+        bool IsGameOver();
+        bool FireShot(string targetedSquare);
     }
 }

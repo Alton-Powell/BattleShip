@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Ships;
 using Domain;
 
 
@@ -16,13 +17,15 @@ namespace Application.Grids.Builder
         {
             var grid = new Grid(10);
 
-            var battleShip = new Ship();
-            var destroyer1 = new Ship();
-            var destroyer2 = new Ship();
+            var battleShip = new BattleShip();
+            var destroyer1 = new Destroyer();
+            var destroyer2 = new Destroyer();
 
             grid.Ships.Add(battleShip);
             grid.Ships.Add(destroyer1);
             grid.Ships.Add(destroyer2);
+
+            grid.PositionShipsOnGrid();
 
             return grid;
         }

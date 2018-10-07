@@ -8,6 +8,8 @@ namespace Application
     {
 
         private readonly IGridBuilder _gridBuilder;
+        private Game _game;
+       
 
         public GameEngine(IGridBuilder gridBuilder)
         {
@@ -17,13 +19,22 @@ namespace Application
         public void InitializeGame(string playerName)
         {
             Player player = new Player(playerName);
+
             Grid grid = _gridBuilder.Create();
+            
+            _game = new Game();
+            _game.Player = player;
+            _game.Grid = grid;
+        }
 
-            Game game = new Game();
-            game.Player = player;
-            game.Grid = grid;
+        public bool FireShot(string targetedSquare)
+        {
+            return _game.FireShot(targetedSquare);
+        }
 
-            return game;
+        public bool IsGameOver()
+        {
+            return _game.IsGameOver();
         }
     }
 }

@@ -16,17 +16,36 @@ namespace BattleShipUI
 
             var battleShipGame = iocContainer.GetInstance<BattleShip>();
 
+            Console.WriteLine("Enter a player name:.");
+            var playerName = Console.ReadLine();
+            Console.Clear();
+
             Console.WriteLine("Enter Coordinates, or 'EXIT' to quit.");
-            battleShipGame.StartGame();
+            battleShipGame.StartGame(playerName);
 
             while (true)
             {
                 var enteredText = Console.ReadLine();
                 if (enteredText.Equals("EXIT", StringComparison.OrdinalIgnoreCase))
                     break;
-
                 
+                //Validate entered Text, must be 2 Characters where
+                //the first character is A-J
+                //the second charcter is 0-9
+                var isHit = battleShipGame.FireShot(enteredText);
+                if (isHit)
+                {
+                    Console.WriteLine("KAPOW!!! What a hit....");
+                }
 
+                var gameOver = battleShipGame.IsGameOver();
+
+                if (gameOver)
+                {
+                    Console.WriteLine("Congratulations!!!....All ships sunk");
+                    Console.ReadKey();
+                    break;
+                }
             }
 
         }

@@ -20,5 +20,15 @@ namespace BattleShipUI
         {
             _gameEngine.InitializeGame(playerName);
         }
+
+        public bool FireShot(string targetedSquare)
+        {
+            return _gameEngine.FireShot(targetedSquare);
+        }
+
+        public bool IsGameOver()
+        {
+            return _gameEngine.IsGameOver();
+        }
     }
 }
