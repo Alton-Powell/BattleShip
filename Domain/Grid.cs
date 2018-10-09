@@ -3,7 +3,7 @@ using Common.Infrastructure;
 using Domain.Ships;
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace Domain
 {
@@ -15,7 +15,17 @@ namespace Domain
 
         private ICollection<Square> _unavailbleSquare;
 
-
+        //Property created to facilitate testing ----
+        //---- Code Smell-------------------------
+        //Refactor required linked to othe refactor comment on 
+        //GridBuilder.cs Line 25.
+        public ICollection<Square> UnavailbleSquare
+        {
+            get
+            {
+                return _unavailbleSquare;
+            }
+        }
         public Grid(int boundary, IRandomNumberGenerator randomNumberGenerator)
         {
             _boundary = boundary;
@@ -44,12 +54,7 @@ namespace Domain
 
         public bool AnyFloatingShips()
         {
-            foreach (var ship in _ships)
-            {
-                if (ship.ShipState == ShipStatus.Afloat)
-                    return true;
-            }
-            return false;
+            return _ships.Any(x => x.ShipState != ShipStatus.Sunk);
         }
 
         public ICollection<Ship> Ships
@@ -71,13 +76,15 @@ namespace Domain
                     randomColumn = GetRandomColumn();
                     randomRow = GetRandomRow();
 
-                    var random = new Random();
-                    shipOrientationAcross = random.Next(2) == 0; //0 Across, 1 Down
+                    shipOrientationAcross = _randomNumberGenerator.Next(2) == 0; //0 Across, 1 Down
 
                     canBePlaced = CanShipBePlaced(randomColumn, randomRow, ship.SpatialCapacity, shipOrientationAcross);
 
-                    if(!canBePlaced)
-                        canBePlaced = CanShipBePlaced(randomColumn, randomRow, ship.SpatialCapacity, !shipOrientationAcross);
+                    if (!canBePlaced)
+                    {
+                        shipOrientationAcross = !shipOrientationAcross;
+                        canBePlaced = CanShipBePlaced(randomColumn, randomRow, ship.SpatialCapacity, shipOrientationAcross);
+                    }
                 }
                 PositionShipOnGrid(randomColumn, randomRow, ship, shipOrientationAcross);
             }

@@ -10,6 +10,16 @@ namespace Domain.Ships
 
         public ShipStatus ShipState { get; set; }
 
+        //return readonly copy of the ships squares
+        public Square[] ShipSquares
+        {
+            get
+            {
+                Square[] squares = new Square[_shipSquares.Count];
+                _shipSquares.CopyTo(squares, 0);
+                return squares;
+            }
+        }
         public int SpatialCapacity
         {
             get { return _spatialCapacity; }
@@ -30,7 +40,7 @@ namespace Domain.Ships
 
             foreach(var shipSquare in _shipSquares)
             {
-                if (shipSquare.Equals(targetedSquare))
+                if (shipSquare.Equals(targetedSquare) && !shipSquare.IsHit)
                 {
                     shipSquare.IsHit = true;
                     UpdateShipState();

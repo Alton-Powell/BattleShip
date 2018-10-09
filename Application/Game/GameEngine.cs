@@ -10,6 +10,8 @@ namespace Application
         private readonly IGridBuilder _gridBuilder;
         private Game _game;
        
+        public string PlayerName => _game.Player.Name;
+        
 
         public GameEngine(IGridBuilder gridBuilder)
         {

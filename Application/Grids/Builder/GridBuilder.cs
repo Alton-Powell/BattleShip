@@ -22,6 +22,7 @@ namespace Application.Grids.Builder
                     throw new ArgumentNullException($"{nameof(randomNumberGenerator)} cannot be null");
         }
 
+        //This method needs refactoring as it violates CQRS, therefore making testing difficult
         public Grid Create()
         {
             var grid = new Grid(10,_randomNumberGenerator);

@@ -17,7 +17,7 @@ namespace BattleShipUI
 
             var battleShipGame = iocContainer.GetInstance<BattleShip>();
             DisplayWelcomeAndAbout();
-            Console.WriteLine("Enter a player name:.");
+            Console.WriteLine("Enter a player name:");
             var playerName = Console.ReadLine();
             Console.Clear();
 
@@ -52,7 +52,7 @@ namespace BattleShipUI
 
                 if (gameOver)
                 {
-                    Console.WriteLine("Congratulations!!!....All ships sunk");
+                    Console.WriteLine($"Congratulations {battleShipGame.GetPlayerName()}!!!....All ships sunk");
                     Console.ReadKey();
                     break;
                 }

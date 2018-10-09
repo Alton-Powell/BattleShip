@@ -16,3 +16,9 @@
 /packages/NUnit.3.11.0
 /packages/System.Threading.Tasks.Extensions.4.3.0
 /packages/System.ValueTuple.4.4.0
+/.vs/BattleShip/lut/0/0/Application/bin/Debug
+/.vs/BattleShip/lut/0/0/BattleShipUI/bin/Debug
+/Tests/bin/Debug
+/.vs/BattleShip/lut/7456/t/Tests/bin/Debug
+/.vs/BattleShip/lut
+/packages/NUnit3TestAdapter.3.10.0

@@ -30,5 +30,10 @@ namespace BattleShipUI
         {
             return _gameEngine.IsGameOver();
         }
+
+        public string GetPlayerName()
+        {
+            return _gameEngine.PlayerName;
+        }
     }
 }
